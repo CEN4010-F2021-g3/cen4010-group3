@@ -1,0 +1,23 @@
+
+.navbar li a{
+    color : white !important;
+}
+
+.navbar li a:hover{
+    color: #224444 !important;
+}
+
+.navbar li a:focus{
+    color: #224444 !important;
+}
+
+#post-image{
+    /* from single-post.php */
+    width: 75% !important;
+    height: auto;
+}
+
+.post-container{ 
+    /* from blog-posts.php */
+    border: 1px solid rgb(185, 185, 185);
+}

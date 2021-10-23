@@ -1,0 +1,27 @@
+.navbar li a{
+    color : white !important;
+}
+
+.navbar li a:hover{
+    color: #224444 !important;
+}
+
+.navbar li a:focus{
+    color: #224444 !important;
+}
+
+#left-panel{
+    background-color: rgb(62, 121, 248);
+}
+
+html,body{
+    height: 100%;
+}
+
+#left-panel a{
+    color: white ;
+}
+
+#left-panel a:hover{
+    background-color: rgb(3, 53, 117);
+}
