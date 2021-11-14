@@ -36,26 +36,29 @@ if(!isset($_GET['post'])){
     }
     ?>
 
+<!-- Blog Post container -->
 <div class="container">    
-    <div class="row post-title my-3">
+    <div class="row post-title text-center my-3">
         <h1><?php echo $post_row['title']?></h1>
     </div>
-    <div class="row post-image">
-        <img src="./assets/post-img/<?php echo($post_row['image']);?>" alt="<?php echo($post_row['summary']) ?>" id="post-image">
+    <div class="post-image-container">
+        <div class="row post-image">
+            <img src="./assets/post-img/<?php echo($post_row['image']);?>" alt="<?php echo($post_row['summary']) ?>" id="post-image">
+        </div>
     </div>
-    <div class="row post-content">
+    <div class="row post-content mx-1">
         <?php echo $post_row['content']?>
     </div>
-    <div class="row post-info">
+    <div class="row post-info mx-1 my-2">
         Post Created on <?php echo $post_row['createdAt'] ?>
     </div>
     <div class="row likes my-2">
-        <!-- TODO add like and dislike buttons -->
-        <!-- TODO add edit and delete button and make them functional-->
-        <div class="col">
-            <a class="btn btn-primary" href="#">Like the Post</a><?php echo($post_row['likesCount'])?> Liked the post
-            <a class="btn btn-primary" href="#">Dislike the Post</a><?php echo($post_row['likesCount'])?> People disliked the post
-        </div>
+        <form action="./src/like_dislike_src.php" method="POST">
+            <input type="hidden" name="post_id" value="<?php echo $post_id?>">
+            <input type="hidden" name="post_slug" value="<?php echo $post_slug ?>">
+            <button type="submit" class="btn btn-primary" name="like-button">Like the Post</button><?php echo($post_row['likesCount'])?> Users liked this post
+            <button type="submit" class="btn btn-primary" name="dislike-button"> Dislike the Post</button><?php echo($post_row['dislikesCount'])?> Users disliked this post
+        </form>
     </div>
     <div class="row add-comment-form my-2">
         <form action="./src/create_comment_src.php" method="POST">

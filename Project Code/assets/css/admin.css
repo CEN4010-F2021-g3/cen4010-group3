@@ -12,6 +12,7 @@
 
 #left-panel{
     background-color: rgb(62, 121, 248);
+    min-height: 100%;
 }
 
 html,body{

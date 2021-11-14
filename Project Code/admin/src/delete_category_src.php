@@ -5,5 +5,5 @@
 
     if (isset($_GET['delete'])){
         $id = $_GET['delete'];
-        deletePost($conn, $id);
+        deleteCategory($conn, $id);
     }

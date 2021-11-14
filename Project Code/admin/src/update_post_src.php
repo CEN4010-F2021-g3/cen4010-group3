@@ -6,7 +6,7 @@
 session_start();
 if(isAdmin() && isSubmit()){
     print_r($_POST);
-    $authorId = $_SESSION['userid'];
+    $post_id = $_POST['post_id'];
     $title = $_POST['title'];
     $category_id = $_POST['category_id'];
     $summary = $_POST['summary'];
@@ -15,6 +15,8 @@ if(isAdmin() && isSubmit()){
     $slug = '';
     $imageNewName = ''; //will contain the name of the image for DB
     $imageDestination = 'assets/post-img/';
+
+    print_r($image) ;
     if(isset($_POST['published'])){
         $published = 1;
     } else {
@@ -25,7 +27,7 @@ if(isAdmin() && isSubmit()){
         return;
     }
     $slug = createSlug($title);
-    if(!checkValidSlug($conn,$slug)){
+    if(!checkValidSlugEdit($conn,$slug,$post_id)){
         echo('Slug already exists in the database');
         return; //modify this
     }
@@ -34,8 +36,10 @@ if(isAdmin() && isSubmit()){
         echo("There has been an error uploading image");
         return; //modify this
     }
-    createPost($conn,$authorId,$category_id,$title,$slug,$summary,$content,$published,$imageNewName);
+    updatePost($conn,$category_id,$title,$slug,$summary,$content,$published,$imageNewName,$post_id);
 
 } else {
     $_SESSION['message'] = 'Something went wrong'; //error message
 }
+
+//TODO fix previous image deletion problem

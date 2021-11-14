@@ -6,6 +6,11 @@ require_once './src/functions_admin.php';
 require_once '../src/dbh_src.php';
 
 $category_rows = getAllCategories($conn);
+if (!isset($_POST['submit_edit'])) {
+    header('Location: ./manage_post.php');
+}
+$post_id = $_POST['post_id'];
+$post_row = getPostById($conn, $post_id);
 
 ?>
 <?php if (isset($_GET['error'])) : ?>
@@ -22,13 +27,15 @@ $category_rows = getAllCategories($conn);
 
     <div class="col-10" id="right-panel">
         <div class="row text-center mt-1">
-            <h1>Create Post</h1>
+            <h1>Edit Post</h1>
         </div>
-        <form action="./src/create_post_src.php" method="POST" enctype="multipart/form-data">
+        <form action="./src/update_post_src.php" method="POST" enctype="multipart/form-data">
+            <!-- post id -->
+            <input type="hidden" name="post_id" value="<?php echo $post_id ?>">
             <!-- post title -->
             <div class="mb-3">
                 <label for="title" class="form-label">Post Title</label>
-                <input type="text" class="form-control" name="title" id="title" aria-describedby="PostTitle" required>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="PostTitle" value="<?php echo $post_row['title'] ?>" required>
                 <div id="emailHelp" class="form-text">Post title must be unique.</div>
             </div>
             <!-- post category -->
@@ -45,13 +52,13 @@ $category_rows = getAllCategories($conn);
             <!-- post summary-->
             <div class="mb-3">
                 <label for="summary" class="form-label">Summary</label>
-                <input type="text" class="form-control" name="summary" id="summary" required>
+                <input type="text" class="form-control" name="summary" id="summary" value="<?php echo $post_row['summary'] ?>" required>
                 <div id="summaryHelp" class="form-text">Describe your post in a few words.</div>
             </div>
             <!-- post content-->
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" name="content" id="content" rows="4" placeholder="Type your post content here" required></textarea>
+                <textarea class="form-control" name="content" id="content" rows="4" required><?php echo $post_row['content'] ?></textarea>
             </div>
             <!-- post image -->
             <div class="mb-3">

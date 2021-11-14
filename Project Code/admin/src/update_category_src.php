@@ -6,36 +6,32 @@
 session_start();
 if(isAdmin() && isSubmit()){
     print_r($_POST);
-    $authorId = $_SESSION['userid'];
-    $title = $_POST['title'];
     $category_id = $_POST['category_id'];
-    $summary = $_POST['summary'];
-    $content = $_POST['content'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
     $image = $_FILES['img_file'];
     $slug = '';
     $imageNewName = ''; //will contain the name of the image for DB
-    $imageDestination = 'assets/post-img/';
-    if(isset($_POST['published'])){
-        $published = 1;
-    } else {
-        $published = 0;
-    }
-    if(!checkEmptyPostFields($title,$category_id,$summary,$content,$image)){
-        echo("There are empty fields in the form"); //TODO modify this later to show message in dashboard
-        return;
-    }
-    $slug = createSlug($title);
-    if(!checkValidSlug($conn,$slug)){
+    $imageDestination = 'assets/category-img/';
+
+    print_r($image) ;
+
+    $slug = createSlug($name);
+    if(!checkValidSlugEdit($conn,$slug,$category_id)){
         echo('Slug already exists in the database');
         return; //modify this
     }
+
     $imageNewName = uploadImage($image,$slug,$imageDestination);
     if(empty($imageNewName)){
         echo("There has been an error uploading image");
         return; //modify this
     }
-    createPost($conn,$authorId,$category_id,$title,$slug,$summary,$content,$published,$imageNewName);
+
+    updateCategory($conn,$category_id,$name,$slug,$description,$imageNewName);
 
 } else {
     $_SESSION['message'] = 'Something went wrong'; //error message
 }
+
+//TODO fix previous image deletion problem

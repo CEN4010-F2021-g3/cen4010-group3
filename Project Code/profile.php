@@ -1,6 +1,6 @@
 <?php
     include_once './includes/header.php';
-
+    
     if(!isset($_SESSION['username'])){ //user is not logged in
         header('Location: ./login.php');
     } else{ //user is logged in
@@ -105,38 +105,50 @@
                 <div class="row">
                     <h3>Blog Posts by <?php echo $profile_username?></h3>
                     <!-- post card (will loop through this with php) -->
-                    <div class="card mb-3" >
-                        <div class="row g-0">
-                            <div class="col-md-3">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Sample Post Title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
+                    <?php
+                        $sql = "SELECT post.* FROM post INNER JOIN users ON post.authorId = users.usersId WHERE post.published=1 AND users.usersName = '$profile_username' ";
+                        $resultData = mysqli_query($conn,$sql);
+                        $post_rows = mysqli_fetch_all($resultData, MYSQLI_ASSOC);
+                    ?>
+                    <?php foreach($post_rows as $post):?>
+                        <div class="card mb-3" >
+                            <div class="row g-0">
+                                <div class="col-md-3">
+                                <img src="./assets/post-img/<?php echo $post['image']?>" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                <div class="card-body">
+                                    <a href="./single-post.php?post=<?php echo $post['slug']?>"><h5 class="card-title"><?php echo $post['title']?></h5></a>
+                                    <p class="card-text"><?php echo $post['summary']?></p>
+                                    <p class="card-text"><small class="text-muted"><?php echo $post['createdAt']?></small></p>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach;?>
                 </div>
                 <div class="row">
-                    <h3>Posts comments by <?php echo $profile_username?></h3>
+                    <h3>Post comments by <?php echo $profile_username?></h3>
                     <!-- Comments card (will loop through this with php) -->
-                    <div class="card mb-3" >
-                        <div class="row g-0">
-                            <div class="col-md-3">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Sample Comment Title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
+                    <?php
+                        $sql = "SELECT post_comment.*,post.title,post.slug FROM post_comment INNER JOIN users ON post_comment.userId = users.usersId INNER JOIN post ON post_comment.postId = post.id 
+                                WHERE post.published=1 AND users.usersName = '$profile_username'";
+                        $resultData = mysqli_query($conn,$sql);
+                        $comment_rows = mysqli_fetch_all($resultData, MYSQLI_ASSOC);
+                    ?>
+                    <?php foreach($comment_rows as $comment):?>
+                        <div class="card mb-3" >
+                            <div class="row g-0">
+                                <div class="col">
+                                <div class="card-body">
+                                    <a href="./single-post.php?post=<?php echo $comment['slug']?>"><h5 class="card-title">Post Title: <?php echo $comment['title']?></h5></a>
+                                    <p class="card-text"><?php echo $comment['content']?></p>
+                                    <p class="card-text"><small class="text-muted"><?php echo $comment['createdAt']?></small></p>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach;?>
                 </div>
             </div>
         </div>

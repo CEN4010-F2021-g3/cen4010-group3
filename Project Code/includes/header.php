@@ -5,6 +5,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
     <!-- Styles CSS -->
     <link href="assets/css/styles.css" rel="stylesheet"/>
+
   </head>
   <body>
     <!-- Navigation bar -->
@@ -41,14 +43,15 @@
           if(isset($_SESSION['username'])){
             echo '<li class="nav-item"><a class="nav-link" href="./src/logout_src.php">Log Out</a></li>'; //a tag redirects to logout.php
             echo '<li class="nav-item"><a class="nav-link" href="./profile.php?username='.$_SESSION['username'].'">My Profile</a></li>';
+            if(isAdmin()){
+              echo '<li class="nav-item"><a class="nav-link" href="./admin/dashboard.php">Admin Dashboard</a></li>';
+            }
           }
           else{
             echo '<li class="nav-item"><a class="nav-link" href="./signup.php">Sign Up</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="./login.php">Log In</a></li>';
           }
-          if(isAdmin()){
-            echo '<li class="nav-item"><a class="nav-link" href="./admin/dashboard.php">Admin Dashboard</a></li>';
-          }
+
         ?>
       </ul>
     </div>

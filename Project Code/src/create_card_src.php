@@ -24,6 +24,7 @@ function createCategoryCard($category_row){
 /****************************************Functions for blog-posts.php ****************************************/
 
 function createPostSummaryCard($post_row){
+    //Parameter is all the columns for the given post row from the posts table
     return '
     <div class="col">
         <div class="card h-100">

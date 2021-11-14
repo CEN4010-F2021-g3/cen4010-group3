@@ -1,0 +1,50 @@
+
+  .nav {
+    background-color: #014bb6;
+  }
+
+  .nav-item {
+    border: 0%;
+  }
+
+  .jumbotron {
+    background-color: #014bb6 !important;
+    text-align: center;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    margin-bottom: 5% !important;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .h2_class {
+    font-weight: bold;
+    margin-bottom: 5%;
+  }
+
+  h3 {
+    font-weight: bold !important;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  .p_ourwork {
+    margin-bottom: 10%;
+  }
+
+  .p_ourmission {
+    margin-bottom: 10%;
+  }
+
+  .team_img {
+    margin-top: 5%;
+    border-radius: 50%;
+    max-height: 70%;
+    max-width: 70%;
+    margin-bottom: 10%;
+    filter: grayscale(70%);
+  }

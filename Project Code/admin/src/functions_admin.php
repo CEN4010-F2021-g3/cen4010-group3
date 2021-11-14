@@ -23,7 +23,6 @@ function checkEmptyPostFields($title, $category_id, $summary, $content, $image){
     }
 }
 
-
 function uploadImage($image, $slug, $destinationFolder){
     //Uploads new image, $newName should be the slug name and $destinationFolder must be given from outermost folder
     //example $destinationFolder = 'assets/post-img/'
@@ -39,6 +38,7 @@ function uploadImage($image, $slug, $destinationFolder){
         if($fileError === 0){
             $fileNameNew = $slug.".".$fileActualExt;
             $fileDestination = '../../' . $destinationFolder . $fileNameNew;
+            unlink($fileDestination);
             move_uploaded_file($fileTmpName,$fileDestination);
             return $fileNameNew;
         } else {
@@ -61,6 +61,20 @@ function createSlug($name){
 function checkValidSlug($conn,$slug){
     //Checks if slug already exists in the database. Returns true if slug is valid to use.
     $sql = "SELECT * from post WHERE slug='$slug' ";
+    $result = mysqli_query($conn,$sql);
+    $rowCount = mysqli_num_rows($result);
+    if($rowCount > 0){
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+/*----------------------------------------Edit Post Functions--------------------------------------------------------*/
+function checkValidSlugEdit($conn,$slug,$post_id){
+    //Checks if slug already exists in the database. Returns true if slug is valid to use.
+    $sql = "SELECT * from post WHERE slug='$slug' AND id != $post_id";
     $result = mysqli_query($conn,$sql);
     $rowCount = mysqli_num_rows($result);
     if($rowCount > 0){

@@ -4,6 +4,6 @@
     require_once '../../src/dbh_src.php';
 
     if (isset($_GET['delete'])){
-        $id = $_GET['delete'];
-        deletePost($conn, $id);
+        $usersId = $_GET['delete'];
+        deleteUser($conn, $usersId);
     }
