@@ -25,25 +25,21 @@ h1, h2 {
 	font-size: 150%;
 }
 
-div {
-	padding: 20px;
-}
-
 .stats-container {
 	text-align: center;
 	float: none;
 	display: inline-block;
+	padding: 20px;
 }
 .location-container {
 	display: inline-block;
 }
 .data-container {
 	border: 2px solid #73AD21;
-    margin-right: 30%;;
 	margin-right: 30%;
 	margin-left: 30%;
-
 }
+
 h4 {
 	font-size: 85%;
  	color: gray;

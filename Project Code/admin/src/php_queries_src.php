@@ -138,7 +138,7 @@ function deletePost($conn, $id)
     exit();
 }
 
-//Delete a user
+//Delete users
 function deleteUser($conn, $usersId)
 {
     $sql = "DELETE FROM users where usersId=$usersId";
