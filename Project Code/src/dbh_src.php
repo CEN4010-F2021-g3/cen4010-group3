@@ -12,10 +12,10 @@ $dbPassword = '';
 $dbName = 'proj_database';
 
 // Namecheap/Cpanel database user
-//$dbHostname = 'localhost';
-//$dbUsername = 'peaczntv';
-//$dbPassword = 'Gp03@2021';
-//$dbName = 'peaczntv_proj_database';
+// $dbHostname = 'localhost';
+// $dbUsername = 'peaczntv';
+// $dbPassword = 'Gp03@2021';
+// $dbName = 'peaczntv_proj_database';
 
 // Ryan's PC
 // $dbHostname = 'localhost';
